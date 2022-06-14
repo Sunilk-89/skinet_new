@@ -1,7 +1,7 @@
 using API.Extensions;
 using API.Helpers;
 using API.Middleware;
-using Infrastruce.Data;
+using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;

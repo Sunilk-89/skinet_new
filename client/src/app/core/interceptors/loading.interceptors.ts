@@ -13,6 +13,10 @@ constructor(private busyService: BusyService){}
         {
             return next.handle(req);
         }
+        if(req.method === 'DELETE')
+        {
+            return next.handle(req);
+        }
 
         if(req.url.includes('emailexists'))
         {

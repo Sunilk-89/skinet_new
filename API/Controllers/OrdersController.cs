@@ -6,10 +6,12 @@ using API.Extensions;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService _orderService;
@@ -37,7 +39,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetOrdersForUser()
         {
-            var email = User.RetriveEmailFromPrincipal();
+            var email = HttpContext.User.RetriveEmailFromPrincipal();
 
             var orders = await _orderService.GetOrdersForUserAsync(email);
 
@@ -47,7 +49,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
         {
-            var email = User.RetriveEmailFromPrincipal();
+            var email = HttpContext.User.RetriveEmailFromPrincipal();
 
             var order = await _orderService.GetOrderByIdAsync(id, email);
 
